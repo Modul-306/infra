@@ -41,7 +41,7 @@ jobs:
       - name: Auto Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore:terraform-fmt"
+          commit_message: "terraform-fmt: automated action"
           file_pattern: "*.tf"
           commit_user_name: "github-actions[bot]"
 
@@ -57,7 +57,7 @@ jobs:
           git-push: "true"
         
       # -------------------------
-      # Terraform Plan
+      # Terraform Speculative Plan
       # -------------------------
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
