@@ -7,10 +7,13 @@ In this repository our IaC for AWS is stored.
 | main.tf     | Main terraform infrastructure     |
 | provider.tf | Terraform provider initialisation |
 
-## Pipeline
-| Nr. | Step                           | Description                                 |
-| --- | ------------------------------ | ------------------------------------------- |
-| 1   | x                              | x                                           |
+## Quality-Pipeline
+| Nr. | Step                           | Description                                               |
+| --- | ------------------------------ | --------------------------------------------------------- |
+| 1   | Setup                          | Preparing the runnner (install software, checkout PR ...) |
+| 2   | Terraform Fmt                  | Formatting terraform code and commit to PR                |
+| 3   | Terraform Docs                 | Update the terraform docs informations in the README      |
+| 4   | Terraform Plan                 | Execute a speculative Terraform Plan                      |
 
 # Terraform Docs
 <!-- BEGIN_TF_DOCS -->
@@ -48,7 +51,5 @@ No inputs.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_web-address"></a> [web-address](#output\_web-address) | n/a |
+No outputs.
 <!-- END_TF_DOCS -->
