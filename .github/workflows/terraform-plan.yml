@@ -18,27 +18,46 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      # -------------------------
+      # Setup
+      # -------------------------
       - name: Checkout
         uses: actions/checkout@v3
+        id: checkout
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
       # -------------------------
       # Terraform Fmt
       # -------------------------
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+
 
       - name: Terraform Fmt
         run: terraform fmt .  
-      
+
       - name: Auto Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore:terraform-fmt"
+          commit_message: "terraform-fmt: automated action"
           file_pattern: "*.tf"
           commit_user_name: "github-actions[bot]"
+
+      # -------------------------
+      # Terraform Docs
+      # -------------------------  
+      - name: Render terraform docs inside the README.md and push changes back to PR branch
+        uses: terraform-docs/gh-actions@v1.3.0
+        with:
+          working-dir: .
+          output-file: README.md
+          output-method: inject
+          git-push: "true"
         
       # -------------------------
-      # Terraform Plan
+      # Terraform Speculative Plan
       # -------------------------
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
