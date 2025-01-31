@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  TF_CLOUD_ORGANIZATION: "Module-306"
+  TF_CLOUD_ORGANIZATION: "Modul-306"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
-  TF_WORKSPACE: "Module-306-infra"
+  TF_WORKSPACE: "Modul-306-infra"
   CONFIG_DIRECTORY: "./"
 
 

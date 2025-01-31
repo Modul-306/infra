@@ -15,10 +15,10 @@ terraform {
   required_version = ">= 1.1.0"
 
   cloud {
-    organization = "Module-306"
+    organization = "Modul-306"
 
     workspaces {
-      name = "Module-306-infra"
+      name = "Modul-306-infra"
     }
   }
 }
