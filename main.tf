@@ -15,10 +15,10 @@ terraform {
   required_version = ">= 1.1.0"
 
   cloud {
-    organization = "REPLACE_ME"
+    organization = "Modul-306"
 
     workspaces {
-      name = "gh-actions-demo"
+      name = "Modul-306-infra"
     }
   }
 }
