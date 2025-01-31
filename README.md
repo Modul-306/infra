@@ -51,7 +51,5 @@ No inputs.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_web-address"></a> [web-address](#output\_web-address) | n/a |
+No outputs.
 <!-- END_TF_DOCS -->
