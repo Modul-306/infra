@@ -29,13 +29,24 @@ jobs:
 
       - name: Terraform Fmt
         run: terraform fmt .  
-      
+
       - name: Auto Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore:terraform-fmt"
           file_pattern: "*.tf"
           commit_user_name: "github-actions[bot]"
+
+      # -------------------------
+      # Terraform Docs
+      # -------------------------  
+      - name: Render terraform docs inside the README.md and push changes back to PR branch
+        uses: terraform-docs/gh-actions@v1.3.0
+        with:
+          working-dir: .
+          output-file: README.md
+          output-method: inject
+          git-push: "true"
         
       # -------------------------
       # Terraform Plan
