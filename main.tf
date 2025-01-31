@@ -1,32 +1,3 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "4.52.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "3.4.3"
-    }
-  }
-  required_version = ">= 1.1.0"
-
-  cloud {
-    organization = "Modul-306"
-
-    workspaces {
-      name = "Modul-306-infra"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-west-2"
-}
-
 resource "random_pet" "sg" {}
 
 data "aws_ami" "ubuntu" {
@@ -75,8 +46,4 @@ resource "aws_security_group" "web-sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-output "web-address" {
-  value = "${aws_instance.web.public_dns}:8080"
 }
