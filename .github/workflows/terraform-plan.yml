@@ -10,14 +10,12 @@ env:
   CONFIG_DIRECTORY: "./"
 
 jobs:
-  # Execute terraform plan
-  terraform:
-    if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
-    name: "Terraform Plan"
+  quality:
+    name: "quality-pipeline"
     runs-on: ubuntu-latest
     permissions:
       # so GitHub can check out this repo using the default github.token
-      contents: read
+      contents: write
       pull-requests: write
     steps:
       - name: Checkout
