@@ -10,26 +10,6 @@ env:
   CONFIG_DIRECTORY: "./"
 
 jobs:
-  terraform-fmt:
-    name: "Terraform Fmt"
-    runs-on: ubuntu-latest
-    permissions:
-      # so GitHub can check out this repo using the default github.token
-      contents: read
-      pull-requests: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Terraform Fmt
-        run: terraform fmt .  
-      
-      - name: Auto Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore:terraform-fmt"
-          file_pattern: "*.tf"
-          commit_user_name: "github-actions[bot]"
   # Execute terraform plan
   terraform:
     if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
@@ -43,6 +23,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      # -------------------------
+      # Terraform Fmt
+      # -------------------------
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Fmt
+        run: terraform fmt .  
+      
+      - name: Auto Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore:terraform-fmt"
+          file_pattern: "*.tf"
+          commit_user_name: "github-actions[bot]"
+        
+      # -------------------------
+      # Terraform Plan
+      # -------------------------
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload
