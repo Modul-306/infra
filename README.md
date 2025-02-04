@@ -6,6 +6,7 @@ In this repository our IaC for AWS is stored.
 | ----------- | --------------------------------- |
 | main.tf     | Main terraform infrastructure     |
 | provider.tf | Terraform provider initialisation |
+| backend.tf  | HCP Terraform connection          |
 
 ## Quality-Pipeline
 | Nr. | Step                           | Description                                               |
