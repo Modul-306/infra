@@ -27,9 +27,7 @@ In this repository our IaC for AWS is stored.
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | n/a |
+No providers.
 
 ## Modules
 
@@ -37,9 +35,7 @@ No modules.
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [tfe_team.developers](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team) | resource |
+No resources.
 
 ## Inputs
 

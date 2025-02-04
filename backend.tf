@@ -7,9 +7,3 @@ terraform {
     }
   }
 }
-
-# creating a team in TFE
-resource "tfe_team" "developers" {
-  name         = "Module-306-infra"
-  organization = "Module-306"
-}
