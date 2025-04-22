@@ -36,5 +36,5 @@ resource "aws_eks_cluster" "m306" {
 
 # ECR Repository
 resource "aws_ecr_repository" "example" {
-    name = "repo-m306"
+  name = "repo-m306"
 }
