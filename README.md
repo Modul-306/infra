@@ -43,6 +43,7 @@ No modules.
 | [aws_db_instance.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/db_instance) | resource |
 | [aws_ecr_repository.example](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/ecr_repository) | resource |
 | [aws_eks_cluster.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/eks_cluster) | resource |
+| [aws_eks_node_group.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/eks_node_group) | resource |
 | [aws_s3_bucket.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/s3_bucket) | resource |
 | [aws_subnet.subnet_1](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/subnet) | resource |
 | [aws_subnet.subnet_2](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/subnet) | resource |
