@@ -28,7 +28,9 @@ In this repository our IaC for AWS is stored.
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.52.0 |
 
 ## Modules
 
@@ -36,7 +38,18 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_db_instance.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/db_instance) | resource |
+| [aws_ecr_repository.example](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/ecr_repository) | resource |
+| [aws_eks_cluster.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/eks_cluster) | resource |
+| [aws_eks_node_group.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/eks_node_group) | resource |
+| [aws_s3_bucket.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/s3_bucket) | resource |
+| [aws_subnet.subnet_1](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/subnet) | resource |
+| [aws_subnet.subnet_2](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/subnet) | resource |
+| [aws_subnet.subnet_3](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/subnet) | resource |
+| [aws_vpc.network](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/vpc) | resource |
+| [aws_iam_role.labrole](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/iam_role) | data source |
 
 ## Inputs
 
