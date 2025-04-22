@@ -23,7 +23,7 @@ resource "aws_eks_node_group" "m306" {
   cluster_name    = aws_eks_cluster.m306.name
   node_group_name = "m306-node-group"
   node_role_arn   = data.aws_iam_role.labrole.arn
-  subnet_ids      = [
+  subnet_ids = [
     aws_subnet.subnet_1.id,
     aws_subnet.subnet_2.id,
     aws_subnet.subnet_3.id
