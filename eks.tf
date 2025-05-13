@@ -18,22 +18,18 @@ resource "aws_eks_cluster" "m306" {
   ]
 }
 
-# Node Group for EKS
-resource "aws_eks_node_group" "m306" {
-  cluster_name    = aws_eks_cluster.m306.name
-  node_group_name = "m306-node-group"
-  node_role_arn   = data.aws_iam_role.labrole.arn
+# Fargate Profile
+resource "aws_eks_fargate_profile" "m306" {
+  cluster_name           = aws_eks_cluster.m306.name
+  fargate_profile_name   = "m306-fargate-profile"
+  pod_execution_role_arn = data.aws_iam_role.labrole
   subnet_ids = [
     aws_subnet.subnet_1.id,
     aws_subnet.subnet_2.id,
     aws_subnet.subnet_3.id
   ]
 
-  scaling_config {
-    desired_size = 1
-    max_size     = 2
-    min_size     = 1
+  selector {
+    namespace = "m306"
   }
-
-  instance_types = ["t3.micro"]
 }
