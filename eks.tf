@@ -37,12 +37,3 @@ resource "aws_eks_node_group" "m306" {
 
   instance_types = ["t3.micro"]
 }
-
-# ECR Repository
-resource "aws_ecr_repository" "staging" {
-  name = "repo-m306-staging"
-}
-
-resource "aws_ecr_repository" "prod" {
-  name = "repo-m306-prod"
-}
