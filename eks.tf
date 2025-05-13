@@ -39,6 +39,10 @@ resource "aws_eks_node_group" "m306" {
 }
 
 # ECR Repository
-resource "aws_ecr_repository" "example" {
-  name = "repo-m306"
+resource "aws_ecr_repository" "staging" {
+  name = "repo-m306-staging"
+}
+
+resource "aws_ecr_repository" "prod" {
+  name = "repo-m306-prod"
 }
