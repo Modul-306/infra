@@ -1,7 +1,7 @@
 resource "aws_eks_cluster" "m306" {
   name     = "eks-m306"
   role_arn = data.aws_iam_role.labrole.arn
-  version  = "1.31"
+  version  = "1.32"
 
   vpc_config {
     endpoint_private_access = true
@@ -30,12 +30,12 @@ resource "aws_eks_node_group" "m306" {
   ]
 
   scaling_config {
-    desired_size = 2
-    max_size     = 3
+    desired_size = 1
+    max_size     = 2
     min_size     = 1
   }
 
-  instance_types = ["t3.medium"]
+  instance_types = ["t3.micro"]
 }
 
 # ECR Repository
