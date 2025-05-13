@@ -1,7 +1,7 @@
 resource "aws_eks_cluster" "m306" {
   name     = "eks-m306"
   role_arn = data.aws_iam_role.labrole.arn
-  version  = "1.31"
+  version  = "1.32"
 
   vpc_config {
     endpoint_private_access = true
