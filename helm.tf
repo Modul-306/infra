@@ -17,7 +17,7 @@ resource "kubernetes_service_account" "sa" {
 }
 
 resource "helm_release" "prod-backend" {
-  name       = "prod-m306-helm-backend"
+  name      = "prod-m306-helm-backend"
   chart     = "oci://${aws_ecr_repository.backend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com/prod-m306-helm-backend"
   version   = "0.1.1"
   namespace = "m306"
