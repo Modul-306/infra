@@ -33,4 +33,9 @@ provider "helm" {
       command     = "aws"
     }
   }
+  registry {
+    url      = "oci://${aws_ecr_repository.backend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com"
+    password = data.aws_ecr_authorization_token.token.password
+    username = data.aws_ecr_authorization_token.token.user_name
+  }
 }
