@@ -32,26 +32,26 @@ resource "helm_release" "prod-backend" {
 
   set {
     name  = "env.DB_HOST"
-    value = aws_db_instance.m306.address
+    value = aws_rds_cluster.m306.endpoint
   }
 
   set {
     name  = "env.DB_PORT"
-    value = aws_db_instance.m306.port
+    value = aws_rds_cluster.m306.port
   }
 
   set {
     name  = "env.DB_NAME"
-    value = aws_db_instance.m306.db_name
+    value = aws_rds_cluster.m306.database_name
   }
 
   set {
     name  = "env.DB_USER"
-    value = aws_db_instance.m306.username
+    value = aws_rds_cluster.m306.master_username
   }
 
   set {
     name  = "env.DB_PASSWORD"
-    value = aws_db_instance.m306.password
+    value = aws_rds_cluster.m306.master_password
   }
 }

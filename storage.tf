@@ -1,28 +1,35 @@
-# RDS Instance
-resource "aws_db_instance" "m306" {
-  allocated_storage    = 20
-  engine               = "postgresql"
-  engine_version       = "17.2"
-  instance_class       = "db.t3.micro"
-  username             = "admin"
-  password             = var.db_password
-  parameter_group_name = "default.postgres17"
-  skip_final_snapshot  = true
-  storage_type         = "gp2"
-  monitoring_interval  = 0  # Disable enhanced monitoring
-
-  # Enable auto-stop after 7 days of inactivity
-  auto_minor_version_upgrade = false
-  deletion_protection       = false
-
-  db_name = "m306db"
-
+# Aurora PostgreSQL Cluster
+resource "aws_rds_cluster" "m306" {
+  cluster_identifier     = "m306-aurora-cluster"
+  engine                = "aurora-postgresql"
+  engine_version        = "17.2"
+  database_name         = "m306db"
+  master_username       = "admin"
+  master_password       = var.db_password
+  skip_final_snapshot   = true
+  apply_immediately     = true
+  
   # Network configuration
   vpc_security_group_ids = [aws_security_group.rds.id]
   db_subnet_group_name   = aws_db_subnet_group.rds.name
 
-  # Enable IAM authentication
+  # IAM authentication
   iam_database_authentication_enabled = true
+
+  # Serverless v2 configuration
+  serverlessv2_scaling_configuration {
+    min_capacity = 0.5
+    max_capacity = 1.0
+  }
+}
+
+# Aurora PostgreSQL Instance (Serverless v2)
+resource "aws_rds_cluster_instance" "m306" {
+  cluster_identifier = aws_rds_cluster.m306.id
+  instance_class    = "db.serverless"
+  engine            = aws_rds_cluster.m306.engine
+  engine_version    = aws_rds_cluster.m306.engine_version
+  identifier        = "m306-aurora-instance"
 }
 
 # Create RDS subnet group
@@ -39,7 +46,7 @@ resource "aws_db_subnet_group" "rds" {
   }
 }
 
-# Create security group for RDS
+# Create security group for Aurora
 resource "aws_security_group" "rds" {
   name        = "m306-rds-sg"
   description = "Security group for RDS instance"
