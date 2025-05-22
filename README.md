@@ -31,6 +31,8 @@ In this repository our IaC for AWS is stored.
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.52.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | n/a |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
 
 ## Modules
 
@@ -56,11 +58,16 @@ No modules.
 | [aws_subnet.subnet_2](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/subnet) | resource |
 | [aws_subnet.subnet_3](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/subnet) | resource |
 | [aws_vpc.network](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/vpc) | resource |
+| [helm_release.prod-backend](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [kubernetes_service_account.sa](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
+| [aws_eks_cluster_auth.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_role.labrole](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/iam_role) | data source |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_db_password"></a> [db\_password](#input\_db\_password) | The password for the RDS instance | `string` | n/a | yes |
 
 ## Outputs
 

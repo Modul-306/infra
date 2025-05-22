@@ -33,3 +33,7 @@ resource "aws_eks_fargate_profile" "m306" {
     namespace = "m306"
   }
 }
+
+data "aws_eks_cluster_auth" "m306" {
+  name = aws_eks_cluster.m306.name
+}

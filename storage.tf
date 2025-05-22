@@ -1,13 +1,15 @@
 # RDS Instance
 resource "aws_db_instance" "m306" {
   allocated_storage    = 20
-  engine               = "mysql"
-  engine_version       = "8.0"
+  engine               = "postgresql"
+  engine_version       = "14.6"
   instance_class       = "db.t3.micro"
   username             = "admin"
-  password             = "password123"
-  parameter_group_name = "default.mysql8.0"
+  password             = var.db_password
+  parameter_group_name = "default.postgres14"
   skip_final_snapshot  = true
+
+  db_name = "m306db"
 }
 
 # S3 Bucket
