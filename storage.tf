@@ -5,7 +5,7 @@ resource "aws_db_instance" "m306" {
   engine_version       = "14.6"
   instance_class       = "db.t3.micro"
   username             = "admin"
-  password             = variables.db_password
+  password             = var.db_password
   parameter_group_name = "default.postgres14"
   skip_final_snapshot  = true
 
