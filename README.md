@@ -64,7 +64,9 @@ No modules.
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_db_password"></a> [db\_password](#input\_db\_password) | The password for the RDS instance | `string` | n/a | yes |
 
 ## Outputs
 
