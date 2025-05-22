@@ -4,7 +4,7 @@ resource "aws_rds_cluster" "m306" {
   engine              = "aurora-postgresql"
   engine_version      = "17.4"
   database_name       = "m306db"
-  master_username     = "admin"
+  master_username     = "m306user"
   master_password     = var.db_password
   skip_final_snapshot = true
   apply_immediately   = true
