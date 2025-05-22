@@ -20,7 +20,7 @@ resource "aws_rds_cluster" "m306" {
 
 resource "aws_rds_cluster_instance" "m306" {
   cluster_identifier = aws_rds_cluster.m306.id
-  instance_class     = "db.t3.micro" # Using a supported instance class
+  instance_class     = "db.t3.medium" # Using supported burstable instance class for Vocareum Labs
   engine             = aws_rds_cluster.m306.engine
   engine_version     = aws_rds_cluster.m306.engine_version
   identifier         = "m306-aurora-instance"

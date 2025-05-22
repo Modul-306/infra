@@ -19,9 +19,15 @@ resource "kubernetes_service_account" "sa" {
 resource "helm_release" "prod-backend" {
   name       = "prod-m306-helm-backend"
   repository = "oci://${aws_ecr_repository.backend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com"
+
   chart      = "prod-m306-helm-backend"
   version    = "0.1.1"
   namespace  = "m306"
+
+  # Ensure ECR authentication is properly configured
+  repository_username = data.aws_ecr_authorization_token.token.user_name
+  repository_password = data.aws_ecr_authorization_token.token.password
+
   # Override image and service account
   set {
     name  = "image.repository"
