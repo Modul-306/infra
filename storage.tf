@@ -9,7 +9,7 @@ resource "aws_db_instance" "m306" {
   parameter_group_name = "default.postgres14"
   skip_final_snapshot  = true
 
-  db_name             = "m306db"
+  db_name = "m306db"
 }
 
 # S3 Bucket
