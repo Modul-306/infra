@@ -1,8 +1,15 @@
+# Kubernetes Namespace
+resource "kubernetes_namespace" "m306" {
+  metadata {
+    name = "m306"
+  }
+}
+
 # Kubernetes Service Account
 resource "kubernetes_service_account" "sa" {
   metadata {
     name      = "labrole-sa"
-    namespace = "default"
+    namespace = "m306"
     annotations = {
       "eks.amazonaws.com/role-arn" = data.aws_iam_role.labrole.arn
     }
@@ -11,9 +18,10 @@ resource "kubernetes_service_account" "sa" {
 
 resource "helm_release" "prod-backend" {
   name       = "prod-backend"
-  repository = aws_ecr_repository.backend_helm_prod.repository_url
-  chart      = aws_ecr_repository.backend_helm_prod.name
-  version    = "latest"
+  repository = "oci://${aws_ecr_repository.backend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com"
+  chart      = "prod-m306-helm-backend"
+  version    = "0.1.1"
+  namespace  = "m306"
   # Override image and service account
   set {
     name  = "image.repository"
@@ -37,7 +45,7 @@ resource "helm_release" "prod-backend" {
 
   set {
     name  = "env.DB_PORT"
-    value = aws_rds_cluster.m306.port
+    value = tostring(aws_rds_cluster.m306.port)
   }
 
   set {

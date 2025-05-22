@@ -15,18 +15,12 @@ resource "aws_rds_cluster" "m306" {
   db_subnet_group_name   = aws_db_subnet_group.rds.name
 
   iam_database_authentication_enabled = true
-
-  # Serverless v2 configuration
-  serverlessv2_scaling_configuration {
-    min_capacity = 0.5
-    max_capacity = 1.0
-  }
 }
 
 
 resource "aws_rds_cluster_instance" "m306" {
   cluster_identifier = aws_rds_cluster.m306.id
-  instance_class     = "db.serverless"
+  instance_class     = "db.t3.micro" # Using a supported instance class
   engine             = aws_rds_cluster.m306.engine
   engine_version     = aws_rds_cluster.m306.engine_version
   identifier         = "m306-aurora-instance"
