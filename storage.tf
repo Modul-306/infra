@@ -9,7 +9,6 @@ resource "aws_rds_cluster" "m306" {
   skip_final_snapshot = true
   apply_immediately   = true
 
-  db_name = "m306db"
 
   # Network configuration
   vpc_security_group_ids = [aws_security_group.rds.id]
