@@ -24,10 +24,6 @@ resource "helm_release" "prod-backend" {
   version   = "0.1.1"
   namespace = "m306"
 
-  # Ensure ECR authentication is properly configured
-  repository_username = data.aws_ecr_authorization_token.token.user_name
-  repository_password = data.aws_ecr_authorization_token.token.password
-
   # Override image and service account
   set {
     name  = "image.repository"
