@@ -30,3 +30,6 @@ provider "helm" {
     token                  = data.aws_eks_cluster_auth.m306.token
   }
 }
+
+# Get ECR authorization token
+data "aws_ecr_authorization_token" "token" {}
