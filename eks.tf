@@ -30,7 +30,19 @@ resource "aws_eks_fargate_profile" "m306" {
   ]
 
   selector {
+    namespace = "default"
+  }
+
+  selector {
+    namespace = "kube-system"
+  }
+
+  selector {
     namespace = "m306"
+  }
+
+  selector {
+    namespace = "m306-staging"
   }
 }
 
