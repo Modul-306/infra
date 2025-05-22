@@ -43,7 +43,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_db_instance.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/db_instance) | resource |
-| [aws_db_instance_role_association.m306_role](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/db_instance_role_association) | resource |
+| [aws_db_subnet_group.rds](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/db_subnet_group) | resource |
 | [aws_ecr_repository.backend_helm_prod](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/ecr_repository) | resource |
 | [aws_ecr_repository.backend_helm_staging](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/ecr_repository) | resource |
 | [aws_ecr_repository.backend_prod](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/ecr_repository) | resource |
@@ -55,6 +55,7 @@ No modules.
 | [aws_eks_cluster.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/eks_cluster) | resource |
 | [aws_eks_fargate_profile.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/eks_fargate_profile) | resource |
 | [aws_s3_bucket.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/s3_bucket) | resource |
+| [aws_security_group.rds](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/security_group) | resource |
 | [aws_subnet.subnet_1](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/subnet) | resource |
 | [aws_subnet.subnet_2](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/subnet) | resource |
 | [aws_subnet.subnet_3](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/subnet) | resource |

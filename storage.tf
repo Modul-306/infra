@@ -9,11 +9,12 @@ resource "aws_rds_cluster" "m306" {
   skip_final_snapshot   = true
   apply_immediately     = true
   
+  db_name = "m306db"
+
   # Network configuration
   vpc_security_group_ids = [aws_security_group.rds.id]
   db_subnet_group_name   = aws_db_subnet_group.rds.name
 
-  # IAM authentication
   iam_database_authentication_enabled = true
 
   # Serverless v2 configuration
@@ -23,7 +24,7 @@ resource "aws_rds_cluster" "m306" {
   }
 }
 
-# Aurora PostgreSQL Instance (Serverless v2)
+
 resource "aws_rds_cluster_instance" "m306" {
   cluster_identifier = aws_rds_cluster.m306.id
   instance_class    = "db.serverless"
@@ -46,7 +47,7 @@ resource "aws_db_subnet_group" "rds" {
   }
 }
 
-# Create security group for Aurora
+
 resource "aws_security_group" "rds" {
   name        = "m306-rds-sg"
   description = "Security group for RDS instance"
