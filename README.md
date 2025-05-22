@@ -53,6 +53,7 @@ No modules.
 | [aws_ecr_repository.frontend_staging](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/ecr_repository) | resource |
 | [aws_eks_cluster.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/eks_cluster) | resource |
 | [aws_eks_fargate_profile.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/eks_fargate_profile) | resource |
+| [aws_iam_role_policy.ecr_access](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/iam_role_policy) | resource |
 | [aws_rds_cluster.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/rds_cluster) | resource |
 | [aws_rds_cluster_instance.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/rds_cluster_instance) | resource |
 | [aws_s3_bucket.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/s3_bucket) | resource |
@@ -66,6 +67,7 @@ No modules.
 | [kubernetes_service_account.sa](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [aws_ecr_authorization_token.token](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/ecr_authorization_token) | data source |
 | [aws_eks_cluster_auth.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/eks_cluster_auth) | data source |
+| [aws_iam_policy_document.ecr_access](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_role.labrole](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/iam_role) | data source |
 
 ## Inputs
