@@ -29,4 +29,13 @@ provider "helm" {
     cluster_ca_certificate = base64decode(aws_eks_cluster.m306.certificate_authority[0].data)
     token                  = data.aws_eks_cluster_auth.m306.token
   }
+
+  registry {
+    url      = "${aws_ecr_repository.backend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com"
+    username = "AWS"
+    password = data.aws_ecr_authorization_token.token.password
+  }
 }
+
+# Get ECR authorization token
+data "aws_ecr_authorization_token" "token" {}
