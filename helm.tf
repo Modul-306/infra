@@ -1,4 +1,3 @@
-
 # Kubernetes Service Account
 resource "kubernetes_service_account" "sa" {
   metadata {
@@ -12,10 +11,9 @@ resource "kubernetes_service_account" "sa" {
 
 resource "helm_release" "prod-backend" {
   name       = "prod-backend"
-  repository = "https://charts.helm.sh/stable"  # Replace with your Helm repo URL
-  chart      = "nginx"                          # Replace with your chart name
-  version    = "1.0.0"                          # Specify chart version
-
+  repository = aws_ecr_repository.backend_helm_prod.repository_url
+  chart      = aws_ecr_repository.backend_helm_prod.name
+  version    = "latest"
   # Override image and service account
   set {
     name  = "image.repository"
@@ -30,5 +28,30 @@ resource "helm_release" "prod-backend" {
   set {
     name  = "serviceAccount.name"
     value = kubernetes_service_account.sa.metadata[0].name
+  }
+
+  set {
+    name  = "env.DB_HOST"
+    value = aws_db_instance.m306.address
+  }
+
+  set {
+    name  = "env.DB_PORT"
+    value = aws_db_instance.m306.port
+  }
+
+  set {
+    name  = "env.DB_NAME"
+    value = aws_db_instance.m306.db_name
+  }
+
+  set {
+    name  = "env.DB_USER"
+    value = aws_db_instance.m306.username
+  }
+
+  set {
+    name  = "env.DB_PASSWORD"
+    value = aws_db_instance.m306.password
   }
 }
