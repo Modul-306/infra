@@ -1,14 +1,14 @@
 # Aurora PostgreSQL Cluster
 resource "aws_rds_cluster" "m306" {
-  cluster_identifier     = "m306-aurora-cluster"
-  engine                = "aurora-postgresql"
-  engine_version        = "17.2"
-  database_name         = "m306db"
-  master_username       = "admin"
-  master_password       = var.db_password
-  skip_final_snapshot   = true
-  apply_immediately     = true
-  
+  cluster_identifier  = "m306-aurora-cluster"
+  engine              = "aurora-postgresql"
+  engine_version      = "17.2"
+  database_name       = "m306db"
+  master_username     = "admin"
+  master_password     = var.db_password
+  skip_final_snapshot = true
+  apply_immediately   = true
+
   db_name = "m306db"
 
   # Network configuration
@@ -27,15 +27,15 @@ resource "aws_rds_cluster" "m306" {
 
 resource "aws_rds_cluster_instance" "m306" {
   cluster_identifier = aws_rds_cluster.m306.id
-  instance_class    = "db.serverless"
-  engine            = aws_rds_cluster.m306.engine
-  engine_version    = aws_rds_cluster.m306.engine_version
-  identifier        = "m306-aurora-instance"
+  instance_class     = "db.serverless"
+  engine             = aws_rds_cluster.m306.engine
+  engine_version     = aws_rds_cluster.m306.engine_version
+  identifier         = "m306-aurora-instance"
 }
 
 # Create RDS subnet group
 resource "aws_db_subnet_group" "rds" {
-  name       = "m306-rds-subnet-group"
+  name = "m306-rds-subnet-group"
   subnet_ids = [
     aws_subnet.subnet_1.id,
     aws_subnet.subnet_2.id,
