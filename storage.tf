@@ -9,11 +9,11 @@ resource "aws_db_instance" "m306" {
   parameter_group_name = "default.postgres17"
   skip_final_snapshot  = true
   storage_type         = "gp2"
-  monitoring_interval  = 0  # Disable enhanced monitoring
+  monitoring_interval  = 0 # Disable enhanced monitoring
 
   # Enable auto-stop after 7 days of inactivity
   auto_minor_version_upgrade = false
-  deletion_protection       = false
+  deletion_protection        = false
 
   db_name = "m306db"
 
@@ -27,7 +27,7 @@ resource "aws_db_instance" "m306" {
 
 # Create RDS subnet group
 resource "aws_db_subnet_group" "rds" {
-  name       = "m306-rds-subnet-group"
+  name = "m306-rds-subnet-group"
   subnet_ids = [
     aws_subnet.subnet_1.id,
     aws_subnet.subnet_2.id,
