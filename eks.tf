@@ -1,3 +1,29 @@
+resource "aws_security_group" "eks" {
+  name        = "m306-eks-sg"
+  description = "Security group for EKS cluster"
+  vpc_id      = aws_vpc.network.id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow HTTPS traffic from anywhere for API server"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow all outbound traffic"
+  }
+
+  tags = {
+    Name = "m306-eks-sg"
+  }
+}
+
 resource "aws_eks_cluster" "m306" {
   name     = "eks-m306"
   role_arn = data.aws_iam_role.labrole.arn
@@ -11,10 +37,12 @@ resource "aws_eks_cluster" "m306" {
       aws_subnet.subnet_2.id,
       aws_subnet.subnet_3.id
     ]
+    security_group_ids = [aws_security_group.eks.id]
   }
 
   depends_on = [
-    data.aws_iam_role.labrole
+    data.aws_iam_role.labrole,
+    aws_security_group.eks
   ]
 }
 
