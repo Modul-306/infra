@@ -88,11 +88,4 @@ resource "helm_release" "prod-backend" {
     name  = "imagePullSecrets[0].name"
     value = kubernetes_secret.ecr_registry_secret.metadata[0].name
   }
-
-  depends_on = [
-    kubernetes_namespace.m306,
-    kubernetes_service_account.sa,
-    kubernetes_secret.ecr_registry_secret,
-    aws_rds_cluster.m306
-  ]
 }
