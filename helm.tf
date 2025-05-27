@@ -15,7 +15,7 @@ resource "kubernetes_secret" "ecr_registry_secret" {
   type = "docker-registry"
 
   data = {
-    docker-server = "${aws_ecr_repository.backend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com"
+    docker-server   = "${aws_ecr_repository.backend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com"
     docker-username = data.aws_ecr_authorization_token.token.user_name
     docker-password = data.aws_ecr_authorization_token.token.password
   }
