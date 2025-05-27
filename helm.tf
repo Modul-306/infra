@@ -9,7 +9,7 @@
 resource "kubernetes_secret" "ecr_registry_secret" {
   metadata {
     name      = "ecr-registry-secret"
-    namespace = kubernetes_namespace.m306.metadata[0].name
+    namespace = "m306"
   }
 
   type = "docker-registry"
@@ -36,7 +36,7 @@ resource "helm_release" "prod-backend" {
   name      = "prod-m306-helm-backend"
   chart     = "oci://${aws_ecr_repository.backend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com/prod-m306-helm-backend"
   version   = "0.1.3"
-  namespace = kubernetes_namespace.m306.metadata[0].name
+  namespace = "m306"
 
   # ECR authentication using repository_username and repository_password
   repository_username = data.aws_ecr_authorization_token.token.user_name
