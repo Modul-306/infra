@@ -12,18 +12,12 @@ resource "kubernetes_secret" "ecr_registry_secret" {
     namespace = kubernetes_namespace.m306.metadata[0].name
   }
 
-  type = "kubernetes.io/dockerconfigjson"
+  type = "docker-registry"
 
   data = {
-    ".dockerconfigjson" = jsonencode({
-      auths = {
-        "${data.aws_ecr_authorization_token.token.proxy_endpoint}" = {
-          username = data.aws_ecr_authorization_token.token.user_name
-          password = data.aws_ecr_authorization_token.token.password
-          auth     = base64encode("${data.aws_ecr_authorization_token.token.user_name}:${data.aws_ecr_authorization_token.token.password}")
-        }
-      }
-    })
+    docker-server = "${aws_ecr_repository.backend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com"
+    docker-username = data.aws_ecr_authorization_token.token.user_name
+    docker-password = data.aws_ecr_authorization_token.token.password
   }
 }
 
