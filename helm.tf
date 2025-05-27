@@ -20,7 +20,11 @@ resource "helm_release" "prod-backend" {
   name      = "prod-m306-helm-backend"
   chart     = "oci://${aws_ecr_repository.backend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com/prod-m306-helm-backend"
   version   = "0.1.2"
-  namespace = "m306"
+  namespace = kubernetes_namespace.m306.metadata[0].name
+
+  # ECR authentication using repository_username and repository_password
+  repository_username = data.aws_ecr_authorization_token.token.user_name
+  repository_password = data.aws_ecr_authorization_token.token.password
 
   # Override image and service account
   set {
@@ -62,4 +66,10 @@ resource "helm_release" "prod-backend" {
     name  = "env.DB_PASSWORD"
     value = aws_rds_cluster.m306.master_password
   }
+
+  depends_on = [
+    kubernetes_namespace.m306,
+    kubernetes_service_account.sa,
+    aws_rds_cluster.m306
+  ]
 }
