@@ -80,7 +80,7 @@ resource "aws_eks_node_group" "fast_nodes" {
   cluster_name    = aws_eks_cluster.m306.name
   node_group_name = "m306-fast-nodes"
   node_role_arn   = data.aws_iam_role.labrole.arn
-  subnet_ids      = [
+  subnet_ids = [
     aws_subnet.subnet_1.id,
     aws_subnet.subnet_2.id,
     aws_subnet.subnet_3.id
@@ -92,8 +92,8 @@ resource "aws_eks_node_group" "fast_nodes" {
     min_size     = 1
   }
 
-  instance_types = ["t3.micro"]  # Good balance of cost and performance for fast startup
-  capacity_type  = "SPOT"    # More reliable startup than spot instances
+  instance_types = ["t3.micro"] # Good balance of cost and performance for fast startup
+  capacity_type  = "SPOT"       # More reliable startup than spot instances
 
   # Use the latest Amazon Linux 2 AMI which is optimized for EKS
   ami_type = "AL2_x86_64"
