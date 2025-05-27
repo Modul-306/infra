@@ -1,9 +1,9 @@
 # Kubernetes Namespace
-resource "kubernetes_namespace" "m306" {
-  metadata {
-    name = "m306"
-  }
-}
+# resource "kubernetes_namespace" "m306" {
+#   metadata {
+#     name = "m306"
+#   }
+# }
 
 # Create ECR docker registry secret - most reliable approach
 resource "kubernetes_secret" "ecr_registry_secret" {
@@ -22,15 +22,15 @@ resource "kubernetes_secret" "ecr_registry_secret" {
 }
 
 # Kubernetes Service Account
-resource "kubernetes_service_account" "sa" {
-  metadata {
-    name      = "labrole-sa"
-    namespace = "m306"
-    annotations = {
-      "eks.amazonaws.com/role-arn" = data.aws_iam_role.labrole.arn
-    }
-  }
-}
+# resource "kubernetes_service_account" "sa" {
+#   metadata {
+#     name      = "labrole-sa"
+#     namespace = "m306"
+#     annotations = {
+#       "eks.amazonaws.com/role-arn" = data.aws_iam_role.labrole.arn
+#     }
+#   }
+# }
 
 resource "helm_release" "prod-backend" {
   name      = "prod-m306-helm-backend"
@@ -51,11 +51,6 @@ resource "helm_release" "prod-backend" {
   set {
     name  = "image.tag"
     value = "latest"
-  }
-
-  set {
-    name  = "serviceAccount.name"
-    value = kubernetes_service_account.sa.metadata[0].name
   }
 
   set {
