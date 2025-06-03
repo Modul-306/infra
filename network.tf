@@ -8,12 +8,12 @@ resource "aws_vpc" "network" {
 }
 
 # Internet Gateway
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.network.id
-  tags = {
-    Name = "m306-igw"
-  }
-}
+# resource "aws_internet_gateway" "igw" {
+#   vpc_id = aws_vpc.network.id
+#   tags = {
+#     Name = "m306-igw"
+#   }
+# }
 
 # Route table for public subnets
 resource "aws_route_table" "public" {
@@ -21,7 +21,7 @@ resource "aws_route_table" "public" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw.id
+    gateway_id = "10.0.1.1/24" # aws_internet_gateway.igw.id
   }
 
   tags = {
