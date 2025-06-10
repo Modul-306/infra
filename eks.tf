@@ -47,33 +47,6 @@ resource "aws_eks_cluster" "m306" {
 
 }
 
-# Fargate Profile
-resource "aws_eks_fargate_profile" "m306" {
-  cluster_name           = aws_eks_cluster.m306.name
-  fargate_profile_name   = "m306-fargate-profile"
-  pod_execution_role_arn = data.aws_iam_role.labrole.arn
-  subnet_ids = [
-    aws_subnet.private_subnet_1.id,
-    aws_subnet.private_subnet_2.id,
-    aws_subnet.private_subnet_3.id
-  ]
-
-  selector {
-    namespace = "default"
-  }
-
-  selector {
-    namespace = "kube-system"
-  }
-
-  selector {
-    namespace = "m306"
-  }
-
-  selector {
-    namespace = "m306-staging"
-  }
-}
 
 # Managed Node Group for fast startup
 resource "aws_eks_node_group" "fast_nodes" {
