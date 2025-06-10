@@ -33,9 +33,9 @@ resource "aws_eks_cluster" "m306" {
     endpoint_private_access = true
     endpoint_public_access  = true
     subnet_ids = [
-      aws_subnet.subnet_1.id,
-      aws_subnet.subnet_2.id,
-      aws_subnet.subnet_3.id
+      aws_subnet.public_subnet_1.id,
+      aws_subnet.public_subnet_2.id,
+      aws_subnet.public_subnet_3.id
     ]
     security_group_ids = [aws_security_group.eks.id]
   }
@@ -53,9 +53,9 @@ resource "aws_eks_fargate_profile" "m306" {
   fargate_profile_name   = "m306-fargate-profile"
   pod_execution_role_arn = data.aws_iam_role.labrole.arn
   subnet_ids = [
-    aws_subnet.subnet_1.id,
-    aws_subnet.subnet_2.id,
-    aws_subnet.subnet_3.id
+    aws_subnet.public_subnet_1.id,
+    aws_subnet.public_subnet_2.id,
+    aws_subnet.public_subnet_3.id
   ]
 
   selector {
@@ -81,9 +81,9 @@ resource "aws_eks_node_group" "fast_nodes" {
   node_group_name = "m306-fast-nodes"
   node_role_arn   = data.aws_iam_role.labrole.arn
   subnet_ids = [
-    aws_subnet.subnet_1.id,
-    aws_subnet.subnet_2.id,
-    aws_subnet.subnet_3.id
+    aws_subnet.public_subnet_1.id,
+    aws_subnet.public_subnet_2.id,
+    aws_subnet.public_subnet_3.id
   ]
 
   scaling_config {

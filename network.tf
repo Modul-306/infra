@@ -7,13 +7,16 @@ resource "aws_vpc" "network" {
   }
 }
 
+# ------------------------
+# Public Subnets
+# ------------------------
 # Internet Gateway
-# resource "aws_internet_gateway" "igw" {
-#   vpc_id = aws_vpc.network.id
-#   tags = {
-#     Name = "m306-igw"
-#   }
-# }
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.network.id
+  tags = {
+    Name = "m306-igw"
+  }
+}
 
 # Route table for public subnets
 resource "aws_route_table" "public" {
@@ -21,7 +24,7 @@ resource "aws_route_table" "public" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "10.0.1.1/24" # aws_internet_gateway.igw.id
+    gateway_id = aws_internet_gateway.igw.id
   }
 
   tags = {
@@ -29,51 +32,114 @@ resource "aws_route_table" "public" {
   }
 }
 
-resource "aws_subnet" "subnet_1" {
+resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.network.id
   cidr_block              = "10.0.1.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "m306-subnet-1"
+    Name = "m306-public-subnet-1"
   }
 }
 
-resource "aws_subnet" "subnet_2" {
+resource "aws_subnet" "public_subnet_2" {
   vpc_id                  = aws_vpc.network.id
   cidr_block              = "10.0.2.0/24"
   availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "m306-subnet-2"
+    Name = "m306-public-subnet-2"
   }
 }
 
-resource "aws_subnet" "subnet_3" {
+resource "aws_subnet" "public_subnet_3" {
   vpc_id                  = aws_vpc.network.id
   cidr_block              = "10.0.3.0/24"
   availability_zone       = "us-east-1c"
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "m306-subnet-3"
+    Name = "m306-public-subnet-3"
   }
 }
 
 # Associate route table with subnets
-resource "aws_route_table_association" "subnet_1" {
-  subnet_id      = aws_subnet.subnet_1.id
+resource "aws_route_table_association" "public_subnet_1" {
+  subnet_id      = aws_subnet.public_subnet_1.id
   route_table_id = aws_route_table.public.id
 }
 
-resource "aws_route_table_association" "subnet_2" {
-  subnet_id      = aws_subnet.subnet_2.id
+resource "aws_route_table_association" "public_subnet_2" {
+  subnet_id      = aws_subnet.public_subnet_2.id
   route_table_id = aws_route_table.public.id
 }
 
-resource "aws_route_table_association" "subnet_3" {
-  subnet_id      = aws_subnet.subnet_3.id
+resource "aws_route_table_association" "public_subnet_3" {
+  subnet_id      = aws_subnet.public_subnet_3.id
   route_table_id = aws_route_table.public.id
+}
+
+
+# ------------------------
+# Private Subnets
+# ------------------------
+# Private Route Table
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.network.id
+
+  tags = {
+    Name = "m306-private-rt"
+  }
+}
+
+# Private Subnets
+resource "aws_subnet" "private_subnet_1" {
+  vpc_id                  = aws_vpc.network.id
+  cidr_block              = "10.0.4.0/24"
+  availability_zone       = "us-east-1a"
+  map_public_ip_on_launch = false # Ensure this is false for private subnets
+
+  tags = {
+    Name = "m306-private-subnet-1"
+  }
+}
+
+resource "aws_subnet" "private_subnet_2" {
+  vpc_id                  = aws_vpc.network.id
+  cidr_block              = "10.0.5.0/24"
+  availability_zone       = "us-east-1b"
+  map_public_ip_on_launch = false # Ensure this is false for private subnets
+
+  tags = {
+    Name = "m306-private-subnet-2"
+  }
+}
+
+resource "aws_subnet" "private_subnet_3" {
+  vpc_id                  = aws_vpc.network.id
+  cidr_block              = "10.0.6.0/24"
+  availability_zone       = "us-east-1c"
+  map_public_ip_on_launch = false # Ensure this is false for private subnets
+
+  tags = {
+    Name = "m306-private-subnet-3"
+  }
+}
+
+# Associate private subnets with the private route table
+resource "aws_route_table_association" "private_subnet_1" {
+  subnet_id      = aws_subnet.private_subnet_1.id
+  route_table_id = aws_route_table.private.id
+}
+
+resource "aws_route_table_association" "private_subnet_2" {
+  subnet_id      = aws_subnet.private_subnet_2.id
+  route_table_id = aws_route_table.private.id
+}
+
+resource "aws_route_table_association" "private_subnet_3" {
+  subnet_id      = aws_subnet.private_subnet_3.id
+  route_table_id = aws_route_table.private.id
 }
