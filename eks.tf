@@ -124,25 +124,25 @@ resource "aws_launch_template" "eks_fast_launch" {
 
   # Pre-configure user data for faster bootstrap
   user_data = base64encode(<<-EOF
-MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="
-
---==MYBOUNDARY==
-Content-Type: text/cloud-config; charset="us-ascii"
-
-#cloud-config
-cloud_final_modules:
-- [users-groups, always]
-
---==MYBOUNDARY==
-Content-Type: text/x-shellscript; charset="us-ascii"
-
-#!/bin/bash
-/etc/eks/bootstrap.sh ${aws_eks_cluster.m306.name} \\
-  --container-runtime containerd \\
-  --kubelet-extra-args "--max-pods=110" \\
-  --b64-cluster-ca ${aws_eks_cluster.m306.certificate_authority[0].data}
---==MYBOUNDARY==--
+MIME-Version: 1.0\n
+Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="\n
+\n
+--==MYBOUNDARY==\n
+Content-Type: text/cloud-config; charset="us-ascii"\n
+\n
+#cloud-config\n
+cloud_final_modules:\n
+- [users-groups, always]\n
+\n
+--==MYBOUNDARY==\n
+Content-Type: text/x-shellscript; charset="us-ascii"\n
+\n
+#!/bin/bash\n
+/etc/eks/bootstrap.sh ${aws_eks_cluster.m306.name} \\\n
+  --container-runtime containerd \\\n
+  --kubelet-extra-args "--max-pods=110" \\\n
+  --b64-cluster-ca ${aws_eks_cluster.m306.certificate_authority[0].data}\n
+--==MYBOUNDARY==--\n
 EOF
   )
 
