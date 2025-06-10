@@ -2,7 +2,7 @@
 resource "aws_rds_cluster" "m306" {
   cluster_identifier  = "m306-aurora-cluster"
   engine              = "aurora-postgresql"
-  engine_version      = "17.4"
+  engine_version      = "15.4"  # Use a more stable version
   database_name       = "m306db"
   master_username     = "m306user"
   master_password     = var.db_password
@@ -13,8 +13,6 @@ resource "aws_rds_cluster" "m306" {
   # Network configuration
   vpc_security_group_ids = [aws_security_group.rds.id]
   db_subnet_group_name   = aws_db_subnet_group.rds.name
-
-  iam_database_authentication_enabled = true
 }
 
 
@@ -46,11 +44,20 @@ resource "aws_security_group" "rds" {
   description = "Security group for RDS instance"
   vpc_id      = aws_vpc.network.id
 
+  # Allow PostgreSQL access from EKS nodes
   ingress {
     from_port       = 5432
     to_port         = 5432
     protocol        = "tcp"
-    security_groups = [aws_eks_cluster.m306.vpc_config[0].cluster_security_group_id]
+    security_groups = [aws_security_group.eks.id]  # Use EKS security group instead
+  }
+
+  # Allow outbound traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
