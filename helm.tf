@@ -25,7 +25,7 @@ resource "kubernetes_secret" "ecr_registry_secret" {
 resource "kubernetes_service_account" "sa" {
   metadata {
     name      = "labrole-sa"
-    namespace = "m306"
+    namespace = kubernetes_namespace.m306.metadata[0].name
     annotations = {
       "eks.amazonaws.com/role-arn" = data.aws_iam_role.labrole.arn
     }
@@ -51,11 +51,6 @@ resource "helm_release" "prod-backend" {
   set {
     name  = "image.tag"
     value = "latest"
-  }
-
-  set {
-    name  = "serviceAccount.name"
-    value = kubernetes_service_account.sa.metadata[0].name
   }
 
   set {
@@ -88,11 +83,4 @@ resource "helm_release" "prod-backend" {
     name  = "imagePullSecrets[0].name"
     value = kubernetes_secret.ecr_registry_secret.metadata[0].name
   }
-
-  depends_on = [
-    kubernetes_namespace.m306,
-    kubernetes_service_account.sa,
-    kubernetes_secret.ecr_registry_secret,
-    aws_rds_cluster.m306
-  ]
 }
