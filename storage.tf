@@ -30,9 +30,9 @@ resource "aws_rds_cluster_instance" "m306" {
 resource "aws_db_subnet_group" "rds" {
   name = "m306-rds-subnet-group"
   subnet_ids = [
-    aws_subnet.subnet_1.id,
-    aws_subnet.subnet_2.id,
-    aws_subnet.subnet_3.id
+    aws_subnet.public_subnet_1.id,
+    aws_subnet.public_subnet_2.id,
+    aws_subnet.public_subnet_3.id
   ]
 
   tags = {
