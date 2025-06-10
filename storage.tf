@@ -2,7 +2,7 @@
 resource "aws_rds_cluster" "m306" {
   cluster_identifier  = "m306-aurora-cluster"
   engine              = "aurora-postgresql"
-  engine_version      = "17.4 "  # Use a more stable version
+  engine_version      = "17.4"  # Removed trailing space
   database_name       = "m306db"
   master_username     = "m306user"
   master_password     = var.db_password
@@ -49,7 +49,7 @@ resource "aws_security_group" "rds" {
     from_port       = 5432
     to_port         = 5432
     protocol        = "tcp"
-    security_groups = [aws_security_group.eks.id]  # Use EKS security group instead
+    security_groups = [aws_security_group.eks.id] # Use EKS security group instead
   }
 
   # Allow outbound traffic
