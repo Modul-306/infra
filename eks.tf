@@ -60,22 +60,16 @@ resource "aws_eks_node_group" "fast_nodes" {
   ]
 
   scaling_config {
-    desired_size = 1
-    max_size     = 3
+    desired_size = 2 # Increased from 1 to 2 nodes
+    max_size     = 4 # Increased from 3 to 4 nodes
     min_size     = 1
   }
 
-  instance_types = ["t3.micro"] # Good balance of cost and performance for fast startup
-  capacity_type  = "SPOT"       # More reliable startup than spot instances
+  instance_types = ["t3.small"] # Upgraded from t3.micro - supports up to 11 pods per node
+  capacity_type  = "ON_DEMAND"  # Changed from SPOT for better reliability
 
   # Use the latest Amazon Linux 2 AMI which is optimized for EKS
   ami_type = "AL2_x86_64"
-
-  # Enable fast launch by using a launch template
-  launch_template {
-    name    = aws_launch_template.eks_fast_launch.name
-    version = aws_launch_template.eks_fast_launch.latest_version
-  }
 
   # Optimize for faster startup
   update_config {
@@ -88,21 +82,6 @@ resource "aws_eks_node_group" "fast_nodes" {
 
   tags = {
     Name = "m306-fast-nodes"
-  }
-}
-
-# Launch template for the node group
-resource "aws_launch_template" "eks_fast_launch" {
-  name = "eks-fast-launch"
-
-  # Remove user data - let EKS handle bootstrapping automatically
-  vpc_security_group_ids = [aws_security_group.eks.id]
-
-  tag_specifications {
-    resource_type = "instance"
-    tags = {
-      Name = "m306-eks-fast-node"
-    }
   }
 }
 
