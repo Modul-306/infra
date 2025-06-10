@@ -100,8 +100,8 @@ resource "aws_eks_node_group" "fast_nodes" {
 
   # Enable fast launch by using a launch template
   launch_template {
-    name    = "eks-fast-launch"
-    version = "1"
+    name    = aws_launch_template.eks_fast_launch.name
+    version = aws_launch_template.eks_fast_launch.latest_version
   }
 
   # Optimize for faster startup
@@ -122,27 +122,12 @@ resource "aws_eks_node_group" "fast_nodes" {
 resource "aws_launch_template" "eks_fast_launch" {
   name = "eks-fast-launch"
 
-  # Pre-configure user data for faster bootstrap
+  # Simple user data for faster bootstrap - no MIME multipart needed
   user_data = base64encode(<<-EOF
-MIME-Version: 1.0\n
-Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="\n
-\n
---==MYBOUNDARY==\n
-Content-Type: text/cloud-config; charset="us-ascii"\n
-\n
-#cloud-config\n
-cloud_final_modules:\n
-- [users-groups, always]\n
-\n
---==MYBOUNDARY==\n
-Content-Type: text/x-shellscript; charset="us-ascii"\n
-\n
-#!/bin/bash\n
-/etc/eks/bootstrap.sh ${aws_eks_cluster.m306.name} \\\n
-  --container-runtime containerd \\\n
-  --kubelet-extra-args "--max-pods=110" \\\n
-  --b64-cluster-ca ${aws_eks_cluster.m306.certificate_authority[0].data}\n
---==MYBOUNDARY==--\n
+#!/bin/bash
+/etc/eks/bootstrap.sh ${aws_eks_cluster.m306.name} \
+  --container-runtime containerd \
+  --kubelet-extra-args "--max-pods=110"
 EOF
   )
 
