@@ -60,8 +60,8 @@ resource "aws_eks_node_group" "fast_nodes" {
   ]
 
   scaling_config {
-    desired_size = 2  # Increased from 1 to 2 nodes
-    max_size     = 4  # Increased from 3 to 4 nodes
+    desired_size = 2 # Increased from 1 to 2 nodes
+    max_size     = 4 # Increased from 3 to 4 nodes
     min_size     = 1
   }
 
