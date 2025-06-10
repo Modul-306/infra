@@ -122,15 +122,7 @@ resource "aws_eks_node_group" "fast_nodes" {
 resource "aws_launch_template" "eks_fast_launch" {
   name = "eks-fast-launch"
 
-  # Simple user data for faster bootstrap - no MIME multipart needed
-  user_data = base64encode(<<-EOF
-#!/bin/bash
-/etc/eks/bootstrap.sh ${aws_eks_cluster.m306.name} \
-  --container-runtime containerd \
-  --kubelet-extra-args "--max-pods=110"
-EOF
-  )
-
+  # Remove user data - let EKS handle bootstrapping automatically
   vpc_security_group_ids = [aws_security_group.eks.id]
 
   tag_specifications {
