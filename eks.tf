@@ -29,6 +29,9 @@ resource "aws_eks_cluster" "m306" {
   role_arn = data.aws_iam_role.labrole.arn
   version  = "1.32"
 
+  # Enable CloudWatch logging for all log types
+  enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+
   vpc_config {
     endpoint_private_access = true
     endpoint_public_access  = true

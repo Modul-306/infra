@@ -96,3 +96,37 @@ resource "helm_release" "prod-backend" {
     aws_rds_cluster.m306
   ]
 }
+
+# AWS Load Balancer Controller
+resource "helm_release" "aws_load_balancer_controller" {
+  name       = "aws-load-balancer-controller"
+  repository = "https://aws.github.io/eks-charts"
+  chart      = "aws-load-balancer-controller"
+  namespace  = "kube-system"
+  version    = "1.13.2"
+
+  set {
+    name  = "clusterName"
+    value = aws_eks_cluster.m306.name
+  }
+
+  set {
+    name  = "serviceAccount.create"
+    value = "true"
+  }
+
+  set {
+    name  = "serviceAccount.name"
+    value = "aws-load-balancer-controller"
+  }
+
+  set {
+    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = data.aws_iam_role.labrole.arn
+  }
+
+  depends_on = [
+    aws_eks_cluster.m306,
+    aws_eks_node_group.fast_nodes
+  ]
+}

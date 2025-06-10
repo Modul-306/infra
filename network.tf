@@ -39,7 +39,9 @@ resource "aws_subnet" "public_subnet_1" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "m306-public-subnet-1"
+    Name                                        = "m306-public-subnet-1"
+    "kubernetes.io/role/elb"                    = "1"
+    "kubernetes.io/cluster/eks-m306"            = "shared"
   }
 }
 
@@ -50,7 +52,9 @@ resource "aws_subnet" "public_subnet_2" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "m306-public-subnet-2"
+    Name                                        = "m306-public-subnet-2"
+    "kubernetes.io/role/elb"                    = "1"
+    "kubernetes.io/cluster/eks-m306"            = "shared"
   }
 }
 
@@ -61,7 +65,9 @@ resource "aws_subnet" "public_subnet_3" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "m306-public-subnet-3"
+    Name                                        = "m306-public-subnet-3"
+    "kubernetes.io/role/elb"                    = "1"
+    "kubernetes.io/cluster/eks-m306"            = "shared"
   }
 }
 
