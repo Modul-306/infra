@@ -53,9 +53,9 @@ resource "aws_eks_fargate_profile" "m306" {
   fargate_profile_name   = "m306-fargate-profile"
   pod_execution_role_arn = data.aws_iam_role.labrole.arn
   subnet_ids = [
-    aws_subnet.public_subnet_1.id,
-    aws_subnet.public_subnet_2.id,
-    aws_subnet.public_subnet_3.id
+    aws_subnet.private_subnet_1.id,
+    aws_subnet.private_subnet_2.id,
+    aws_subnet.private_subnet_3.id
   ]
 
   selector {
@@ -124,12 +124,26 @@ resource "aws_launch_template" "eks_fast_launch" {
 
   # Pre-configure user data for faster bootstrap
   user_data = base64encode(<<-EOF
-    #!/bin/bash
-    /etc/eks/bootstrap.sh ${aws_eks_cluster.m306.name} \
-      --container-runtime containerd \
-      --kubelet-extra-args "--max-pods=110" \
-      --b64-cluster-ca ${aws_eks_cluster.m306.certificate_authority[0].data}
-    EOF
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="
+
+--==MYBOUNDARY==
+Content-Type: text/cloud-config; charset="us-ascii"
+
+#cloud-config
+cloud_final_modules:
+- [users-groups, always]
+
+--==MYBOUNDARY==
+Content-Type: text/x-shellscript; charset="us-ascii"
+
+#!/bin/bash
+/etc/eks/bootstrap.sh ${aws_eks_cluster.m306.name} \\
+  --container-runtime containerd \\
+  --kubelet-extra-args "--max-pods=110" \\
+  --b64-cluster-ca ${aws_eks_cluster.m306.certificate_authority[0].data}
+--==MYBOUNDARY==--
+EOF
   )
 
   vpc_security_group_ids = [aws_security_group.eks.id]
