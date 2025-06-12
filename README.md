@@ -44,7 +44,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_db_subnet_group.rds](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/db_subnet_group) | resource |
+| [aws_db_subnet_group.rds_private](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/db_subnet_group) | resource |
 | [aws_ecr_repository.backend_helm_prod](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/ecr_repository) | resource |
 | [aws_ecr_repository.backend_helm_staging](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/ecr_repository) | resource |
 | [aws_ecr_repository.backend_prod](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/ecr_repository) | resource |
