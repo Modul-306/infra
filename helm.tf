@@ -116,7 +116,7 @@ resource "helm_release" "prod-backend" {
   ]
 }
 
-# AWS Load Balancer Controller
+# AWS Load Balancer Controller - using existing LabRole
 resource "helm_release" "aws_load_balancer_controller" {
   name       = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
@@ -131,21 +131,23 @@ resource "helm_release" "aws_load_balancer_controller" {
 
   set {
     name  = "serviceAccount.create"
-    value = "true"
+    value = "false"
   }
 
   set {
     name  = "serviceAccount.name"
-    value = "aws-load-balancer-controller"
+    value = kubernetes_service_account.aws_load_balancer_controller.metadata[0].name
   }
 
+  # Skip IAM policy creation since we're using LabRole
   set {
-    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = data.aws_iam_role.labrole.arn
+    name  = "enableServiceMutatorWebhook"
+    value = "false"
   }
 
   depends_on = [
     aws_eks_cluster.m306,
-    aws_eks_node_group.fast_nodes
+    aws_eks_node_group.fast_nodes,
+    kubernetes_service_account.aws_load_balancer_controller
   ]
 }
