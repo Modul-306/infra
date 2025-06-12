@@ -12,7 +12,7 @@ resource "aws_rds_cluster" "m306" {
 
   # Network configuration
   vpc_security_group_ids = [aws_security_group.rds.id]
-  db_subnet_group_name   = aws_db_subnet_group.rds.name
+  db_subnet_group_name   = aws_db_subnet_group.rds_private.name
 }
 
 
@@ -25,8 +25,8 @@ resource "aws_rds_cluster_instance" "m306" {
 }
 
 # Create RDS subnet group using private subnets
-resource "aws_db_subnet_group" "rds" {
-  name = "m306-rds-subnet-group"
+resource "aws_db_subnet_group" "rds_private" {
+  name = "m306-rds-private-subnet-group"
   subnet_ids = [
     aws_subnet.private_subnet_1.id,
     aws_subnet.private_subnet_2.id,
@@ -34,7 +34,7 @@ resource "aws_db_subnet_group" "rds" {
   ]
 
   tags = {
-    Name = "m306-rds-subnet-group"
+    Name = "m306-rds-private-subnet-group"
   }
 }
 
