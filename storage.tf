@@ -2,7 +2,7 @@
 resource "aws_rds_cluster" "m306" {
   cluster_identifier  = "m306-aurora-cluster"
   engine              = "aurora-postgresql"
-  engine_version      = "17.4"  # Removed trailing space
+  engine_version      = "17.4" # Removed trailing space
   database_name       = "m306db"
   master_username     = "m306user"
   master_password     = var.db_password
@@ -24,13 +24,13 @@ resource "aws_rds_cluster_instance" "m306" {
   identifier         = "m306-aurora-instance"
 }
 
-# Create RDS subnet group
+# Create RDS subnet group using private subnets
 resource "aws_db_subnet_group" "rds" {
   name = "m306-rds-subnet-group"
   subnet_ids = [
-    aws_subnet.public_subnet_1.id,
-    aws_subnet.public_subnet_2.id,
-    aws_subnet.public_subnet_3.id
+    aws_subnet.private_subnet_1.id,
+    aws_subnet.private_subnet_2.id,
+    aws_subnet.private_subnet_3.id
   ]
 
   tags = {
