@@ -39,7 +39,7 @@ jobs:
         run: terraform fmt .  
 
       - name: Auto Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "terraform-fmt: automated action"
           file_pattern: "*.tf"
