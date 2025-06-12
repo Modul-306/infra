@@ -87,7 +87,3 @@ resource "aws_eks_node_group" "fast_nodes" {
     Name = "m306-fast-nodes"
   }
 }
-
-data "aws_eks_cluster_auth" "m306" {
-  name = aws_eks_cluster.m306.name
-}

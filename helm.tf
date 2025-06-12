@@ -3,6 +3,11 @@ resource "kubernetes_namespace" "m306" {
   metadata {
     name = "m306"
   }
+
+  depends_on = [
+    aws_eks_cluster.m306,
+    aws_eks_node_group.fast_nodes
+  ]
 }
 
 # Create ECR docker registry secret - most reliable approach
@@ -19,6 +24,12 @@ resource "kubernetes_secret" "ecr_registry_secret" {
     docker-username = data.aws_ecr_authorization_token.token.user_name
     docker-password = data.aws_ecr_authorization_token.token.password
   }
+
+  depends_on = [
+    kubernetes_namespace.m306,
+    aws_eks_cluster.m306,
+    aws_eks_node_group.fast_nodes
+  ]
 }
 
 # Kubernetes Service Account
@@ -30,6 +41,12 @@ resource "kubernetes_service_account" "sa" {
       "eks.amazonaws.com/role-arn" = data.aws_iam_role.labrole.arn
     }
   }
+
+  depends_on = [
+    kubernetes_namespace.m306,
+    aws_eks_cluster.m306,
+    aws_eks_node_group.fast_nodes
+  ]
 }
 
 resource "helm_release" "prod-backend" {
@@ -93,7 +110,9 @@ resource "helm_release" "prod-backend" {
     kubernetes_namespace.m306,
     kubernetes_service_account.sa,
     kubernetes_secret.ecr_registry_secret,
-    aws_rds_cluster.m306
+    aws_rds_cluster.m306,
+    aws_eks_cluster.m306,
+    aws_eks_node_group.fast_nodes
   ]
 }
 
