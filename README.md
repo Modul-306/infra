@@ -35,6 +35,7 @@ In this repository our IaC for AWS is stored.
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.52.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | ~> 2.11 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | ~> 2.23 |
+| <a name="provider_null"></a> [null](#provider\_null) | n/a |
 
 ## Modules
 
@@ -84,7 +85,10 @@ No modules.
 | [kubernetes_secret.ecr_registry_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_service_account.aws_load_balancer_controller](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [kubernetes_service_account.sa](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
+| [null_resource.kubectl_setup](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [aws_ecr_authorization_token.token](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/ecr_authorization_token) | data source |
+| [aws_eks_cluster.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/eks_cluster) | data source |
+| [aws_eks_cluster_auth.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_role.labrole](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/iam_role) | data source |
 
 ## Inputs
