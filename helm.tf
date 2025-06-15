@@ -6,7 +6,8 @@ resource "kubernetes_namespace" "m306" {
 
   depends_on = [
     aws_eks_cluster.m306,
-    aws_eks_node_group.fast_nodes
+    aws_eks_node_group.fast_nodes,
+    null_resource.kubectl_setup
   ]
 }
 
