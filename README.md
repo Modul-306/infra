@@ -85,6 +85,8 @@ No modules.
 | [kubernetes_service_account.aws_load_balancer_controller](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [kubernetes_service_account.sa](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [aws_ecr_authorization_token.token](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/ecr_authorization_token) | data source |
+| [aws_eks_cluster.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/eks_cluster) | data source |
+| [aws_eks_cluster_auth.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_role.labrole](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/iam_role) | data source |
 
 ## Inputs
