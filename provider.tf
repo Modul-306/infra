@@ -27,16 +27,23 @@ provider "aws" {
 
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.m306.endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.m306.certificate_authority[0].data)
-  token                  = data.aws_eks_cluster_auth.m306.token
+  cluster_ca_certificate = base64decode(aws_eks_cluster.m306.certificate_authority[0].data)
+
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    command     = "aws"
+    args        = ["eks", "get-token", "--cluster-name", data.aws_eks_cluster.m306.name, "--region", "us-east-1"]
+  }
 }
 
 provider "helm" {
   kubernetes {
     host                   = data.aws_eks_cluster.m306.endpoint
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.m306.certificate_authority[0].data)
-    token                  = data.aws_eks_cluster_auth.m306.token
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      command     = "aws"
+      args        = ["eks", "get-token", "--cluster-name", data.aws_eks_cluster.m306.name, "--region", "us-east-1"]
+    }
   }
 }
-
-# Data sources are in data.tf to avoid circular dependencies
