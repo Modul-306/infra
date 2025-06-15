@@ -86,9 +86,6 @@ No modules.
 | [kubernetes_service_account.sa](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [aws_ecr_authorization_token.token](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/ecr_authorization_token) | data source |
 | [aws_iam_role.labrole](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/data-sources/iam_role) | data source |
-| [kubernetes_service.backend_service](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service) | data source |
-| [kubernetes_service.frontend_prod_service](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service) | data source |
-| [kubernetes_service.frontend_staging_service](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service) | data source |
 
 ## Inputs
 
@@ -98,10 +95,5 @@ No modules.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_backend_load_balancer_url"></a> [backend\_load\_balancer\_url](#output\_backend\_load\_balancer\_url) | Backend Load Balancer URL |
-| <a name="output_frontend_prod_load_balancer_url"></a> [frontend\_prod\_load\_balancer\_url](#output\_frontend\_prod\_load\_balancer\_url) | Frontend Production Load Balancer URL |
-| <a name="output_frontend_staging_load_balancer_url"></a> [frontend\_staging\_load\_balancer\_url](#output\_frontend\_staging\_load\_balancer\_url) | Frontend Staging Load Balancer URL |
-| <a name="output_rds_endpoint"></a> [rds\_endpoint](#output\_rds\_endpoint) | RDS Cluster Endpoint |
+No outputs.
 <!-- END_TF_DOCS -->
