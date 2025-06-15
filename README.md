@@ -55,6 +55,8 @@ No modules.
 | [aws_ecr_repository.frontend_staging](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/ecr_repository) | resource |
 | [aws_eks_cluster.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/eks_cluster) | resource |
 | [aws_eks_node_group.fast_nodes](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/eks_node_group) | resource |
+| [aws_iam_policy.aws_load_balancer_controller](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/iam_policy) | resource |
+| [aws_iam_role_policy_attachment.aws_load_balancer_controller](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_internet_gateway.igw](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/internet_gateway) | resource |
 | [aws_rds_cluster.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/rds_cluster) | resource |
 | [aws_rds_cluster_instance.m306](https://registry.terraform.io/providers/hashicorp/aws/4.52.0/docs/resources/rds_cluster_instance) | resource |
