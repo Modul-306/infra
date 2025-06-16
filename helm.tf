@@ -216,8 +216,8 @@ resource "helm_release" "prod-frontend" {
 # Frontend Staging Helm Release
 resource "helm_release" "staging-frontend" {
   name      = "staging-m306-helm-frontend"
-  chart     = "oci://${aws_ecr_repository.frontend_helm_staging.registry_id}.dkr.ecr.us-east-1.amazonaws.com/staging-m306-helm-frontend"
-  version   = "0.1.1-main"
+  chart     = "oci://${aws_ecr_repository.frontend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com/prod-m306-helm-frontend"
+  version   = "0.1.1"
   namespace = kubernetes_namespace.m306.metadata[0].name
 
   # ECR authentication using repository_username and repository_password
@@ -227,13 +227,13 @@ resource "helm_release" "staging-frontend" {
   # Override image repository
   set {
     name  = "image.repository"
-    value = "${aws_ecr_repository.frontend_staging.registry_id}.dkr.ecr.us-east-1.amazonaws.com/${aws_ecr_repository.frontend_staging.name}"
+    value = "${aws_ecr_repository.frontend_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com/${aws_ecr_repository.frontend_prod.name}"
   }
 
   # Set the image tag
   set {
     name  = "image.tag"
-    value = "main"
+    value = "latest"
   }
 
   # Set API URL to backend service
