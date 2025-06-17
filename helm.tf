@@ -172,7 +172,7 @@ resource "helm_release" "aws_load_balancer_controller" {
 resource "helm_release" "prod-frontend" {
   name      = "prod-m306-helm-frontend"
   chart     = "oci://${aws_ecr_repository.frontend_helm_prod.registry_id}.dkr.ecr.us-east-1.amazonaws.com/prod-m306-helm-frontend"
-  version   = "0.1.1"
+  version   = "0.1.2"
   namespace = kubernetes_namespace.m306.metadata[0].name
 
   # ECR authentication using repository_username and repository_password
